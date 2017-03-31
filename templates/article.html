@@ -52,7 +52,6 @@
     <p>{{ _('Like this article? Share it with your friends!') }}</p>
     <div class="addthis_native_toolbox"></div>
     <div class="addthis_sharing_toolbox"></div>
-    <div class="addthis_inline_share_toolbox"></div>
   </div>
   {% endif %}
 
@@ -65,8 +64,43 @@
     {% endfor %}
     </ul>
   </div>
-  {% else %}
-    <div class="addthis_relatedposts_inline">
+  {% endif %}
+
+  {% if article.series %}
+    <hr />
+    <p>This post is part {{ article.series.index }} of the "{{ article.series.name }}" series:</p>
+    <ol class="parts">
+        {% for part_article in article.series.all %}
+            <li {% if part_article == article %}class="active"{% endif %}>
+                <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+            </li>
+        {% endfor %}
+    </ol>
+    <hr />
+  {% endif %}
+
+  <div class="article-navigation">
+    {% if article.prev_article %}
+      <a href="{{ SITEURL }}/{{ article.prev_article.url}}" class="article-prev">
+        &larr; {{ article.prev_article.title }}
+      </a>
+    {% endif %}
+    {% if article.next_article %}
+      <a href="{{ SITEURL }}/{{ article.next_article.url}}" class="article-next">
+        {{ article.next_article.title }} &rarr;
+       </a>
+    {% endif %}
+  </div>
+
+  {% if article.share_post and article.status != 'draft' %}
+  <div>
+    <ul class="share-buttons">
+      Share on:
+      <li><a href="{{article.share_post['facebook']}}" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="/images/social_flat_rounded_rects_svg/Facebook.svg"></a></li>
+      <li><a href="{{article.share_post['twitter']}}" target="_blank" title="Tweet"><img alt="Tweet" src="/images/social_flat_rounded_rects_svg/Twitter.svg"></a></li>
+      <li><a href="{{article.share_post['google-plus']}}" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="/images/social_flat_rounded_rects_svg/Google+.svg"></a></li>
+    </ul>
+   </div>
   {% endif %}
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_bottom %}
