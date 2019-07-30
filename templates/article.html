@@ -92,17 +92,6 @@
     {% endif %}
   </div>
 
-  {% if article.share_post and article.status != 'draft' %}
-  <div>
-    <ul class="share-buttons">
-      Share on:
-      <li><a href="{{article.share_post['facebook']}}" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="/images/social_flat_rounded_rects_svg/Facebook.svg"></a></li>
-      <li><a href="{{article.share_post['twitter']}}" target="_blank" title="Tweet"><img alt="Tweet" src="/images/social_flat_rounded_rects_svg/Twitter.svg"></a></li>
-      <li><a href="{{article.share_post['google-plus']}}" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="/images/social_flat_rounded_rects_svg/Google+.svg"></a></li>
-    </ul>
-   </div>
-  {% endif %}
-
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_bottom %}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle ads-responsive"
